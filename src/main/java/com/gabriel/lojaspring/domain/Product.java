@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @SuppressWarnings("serial")
 @Entity
 public class Product implements Serializable{
@@ -23,7 +25,8 @@ public class Product implements Serializable{
     private Integer id;
     private String nome;
     private Double preco;
-
+    
+    @JsonIgnore()
     @ManyToMany
     @JoinTable(name = "PRODUCT_CATEGORY",
             joinColumns = @JoinColumn(name = "product_id"),
