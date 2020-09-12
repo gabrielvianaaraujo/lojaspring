@@ -6,32 +6,35 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.gabriel.lojaspring.domain.Category;
+import com.gabriel.lojaspring.repositories.CategoryRepository;
+import com.gabriel.lojaspring.services.CategoryService;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LojaspringApplication {
+public class LojaspringApplication implements CommandLineRunner{
+
+	@Autowired
+	private CategoryRepository categoryRepository;
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(LojaspringApplication.class, args);
 
-		Category c1 = new Category();
-		Category c2 = new Category();
-		Category c3 = new Category();
+	}
 
-		List<Category> categorias = new ArrayList<>();
+	@Override
+	public void run(String... args) throws Exception {
 		
-		c1.setId(1);
-		c1.setName("Informática");
+		Category c1 = new Category(null, "Informática");
+		Category c2 = new Category(null, "Escritório");
+		Category c3 = new Category(null, "Limpeza");
 
-		c2.setId(2);
-		c2.setName("Móveis");
+		categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
 
-		c3.setId(3);
-		c3.setName("Limpeza");
-
-		categorias.addAll(Arrays.asList(c1,c2,c3));
 	}
 
 
