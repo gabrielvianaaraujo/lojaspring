@@ -1,11 +1,14 @@
 package com.gabriel.lojaspring.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @SuppressWarnings("serial")
 @Entity
@@ -17,6 +20,10 @@ public class Category implements Serializable{
 
     private String name;
 
+    @ManyToMany(mappedBy = "categories")
+    private List<Product> products = new ArrayList<>();
+
+    //Construtores
     public Category() {}
 
     public Category(Integer id, String name) {
@@ -24,12 +31,11 @@ public class Category implements Serializable{
         this.name = name;
     }
 
+
+    //Getters and Setters
+
     public Integer getId() {
         return Id;
-    }
-
-    public void setId(Integer id) {
-        Id = id;
     }
 
     public String getName() {
@@ -38,6 +44,14 @@ public class Category implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
@@ -65,6 +79,4 @@ public class Category implements Serializable{
         return true;
     }
 
-    
-    
 }
